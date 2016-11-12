@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="wrap_content"
+                android:background="#ffffff"
+                android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background"
+        android:id="@+id/imageView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/login_portal_background_image" />
+
+    <Button
+        android:text="@string/lenny"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonLenny"
+        android:background="@color/cardview_light_background"
+        android:layout_below="@+id/buttonJane"
+        android:layout_alignLeft="@+id/buttonJane"
+        android:layout_alignStart="@+id/buttonJane"
+        android:layout_centerHorizontal="true"
+        android:onClick="loginClicked"
+        android:alpha="0.85"/>
+
+
+    <Button
+        android:text="@string/wendy"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonWendy"
+        android:background="@color/cardview_light_background"
+        android:layout_below="@+id/buttonLenny"
+        android:layout_alignLeft="@+id/buttonJane"
+        android:layout_alignStart="@+id/buttonJane"
+        android:layout_centerHorizontal="true"
+        android:onClick="loginClicked"
+        android:alpha="0.85"/>
+
+    <TextView
+        android:text="@string/users"
+        android:layout_width="200dp"
+        android:id="@+id/textView4"
+        android:background="@color/cardview_light_background"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:layout_marginTop="152dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/buttonJohnny"
+        android:layout_alignStart="@+id/buttonJohnny"
+        android:layout_centerHorizontal="true"
+        android:alpha="0.85"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="@string/johnny"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonJohnny"
+        tools:background="@color/cardview_light_background"
+        android:layout_width="200dp"
+        android:layout_below="@+id/textView4"
+        android:layout_alignLeft="@+id/buttonJane"
+        android:layout_alignStart="@+id/buttonJane"
+        android:layout_centerHorizontal="true"
+        android:onClick="loginClicked"
+        android:background="@color/cardview_light_background"
+        android:alpha="0.85"/>
+
+    <Button
+        android:text="@string/jane"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonJane"
+        android:background="@color/cardview_light_background"
+        android:layout_width="200dp"
+        android:layout_below="@+id/buttonJohnny"
+        android:layout_centerHorizontal="true"
+        android:onClick="loginClicked"
+        android:alpha="0.85"/>
+
+
+</RelativeLayout>
