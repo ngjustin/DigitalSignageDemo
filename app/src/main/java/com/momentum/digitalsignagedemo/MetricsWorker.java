@@ -77,7 +77,17 @@ public class MetricsWorker extends AsyncTask<String, Void, String> {
     }
 
     @Override
+    protected void onPreExecute() {
+
+    }
+
+    @Override
     protected void onPostExecute(String result) {
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onProgressUpdate(Void... values) {
+
     }
 }
