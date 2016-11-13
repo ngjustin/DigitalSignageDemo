@@ -65,6 +65,5 @@ public class DetailedAdDisplayActivity extends Activity {
                 }
             }
         }
-        //image.setImageResource(R.drawable.greygum);
     }
 }

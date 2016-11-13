@@ -17,9 +17,6 @@ import java.util.ArrayList;
  */
 public class LoginActivity extends Activity {
 
-    ArrayList<User> users = new ArrayList<User>();
-    ArrayList<String> names = new ArrayList<String>();
-
     User johnny = new User("Johnny", "Appleseed", "Computer Science", 20, "Male");
     User jane = new User("Jane", "Doe", "Software Engineering", 18, "Female");
     User lenny = new User("Lenny", "Linux", "Psychology", 43, "Male");

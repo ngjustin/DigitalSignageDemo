@@ -30,7 +30,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     private int urlIndex;
     private ArrayList<Ad> ads;
     ThirdFragment three;
+    String str_display = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             public void onResult(JSONObject object) {
                 ads.clear();
                 processJson(object);
+                pushMetrics();
             }
         }, MainActivity.this).execute("https://spreadsheets.google.com/tq?key=1a7_HmbfYc2sWd95JiSH6ikwG6ikffGUQ5Df81VcoekM");*/
 
@@ -147,6 +151,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                             public void onResult(JSONObject object) {
                                 ads.clear();
                                 processJson(object);
+                                str_display = "Student Union Monitor 1";
+                                pushMetrics();
                             }
                         }, MainActivity.this).execute("https://spreadsheets.google.com/tq?key=1a7_HmbfYc2sWd95JiSH6ikwG6ikffGUQ5Df81VcoekM");
                     } else if (resText.equals("2")) {
@@ -155,6 +161,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                             public void onResult(JSONObject object) {
                                 ads.clear();
                                 processJson(object);
+                                str_display = "Student Union Monitor 2";
+                                pushMetrics();
                             }
                         }, MainActivity.this).execute("https://spreadsheets.google.com/tq?key=1SpZGMkAQZtPFFDmbN7FZanAXj930qm9Z-B22s7KW0I4");
                     } else if (resText.equals("3")) {
@@ -163,6 +171,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                             public void onResult(JSONObject object) {
                                 ads.clear();
                                 processJson(object);
+                                str_display = "Student Union Monitor 3";
+                                pushMetrics();
                             }
                         }, MainActivity.this).execute("https://spreadsheets.google.com/tq?key=1du94yZUR8MLnKfqlYGmlOruQAPaNgAvyNgajdO51YUU");
                     }
@@ -261,7 +271,6 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                 String adLink = columns.getJSONObject(3).getString("v");
                 String adThumbnail = columns.getJSONObject(4).getString("v");
                 String adPicture = columns.getJSONObject(5).getString("v");
-                //int imgSrc = 0;
 
                 Ad a = new Ad(adTitle, adDetails, adDescription, adLink, adThumbnail, adPicture);
                 ads.add(a);
@@ -269,5 +278,16 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void pushMetrics() {
+        String str_major = currentUser.getMajor();
+        String str_age = Integer.toString(currentUser.getAge());
+        String str_gender = currentUser.getGender();
+        String str_time = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss a").format(new Date());
+        String type = "metrics";
+
+        MetricsWorker metricsWorker = new MetricsWorker(this);
+        metricsWorker.execute(type, str_major, str_age, str_gender, str_display, str_time);
     }
 }
