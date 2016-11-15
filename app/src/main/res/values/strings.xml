@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">DigitalSignageDemo</string>
+    <string name="app_name">MomentumAnalytics</string>
     <string name="emptyString" />
     <string name="msg">Enable permission - Camera</string>
     <string name="details">Details</string>
     <string name="description">Description</string>
     <string name="link">Website</string>
-    <string name="hello">Hello, </string>
+    <string name="hello">Welcome! </string>
     <string name="log_out">Log Out</string>
     <string name="an_image_related_to_the_ad">An image related to the ad.</string>
     <string name="login_portal_background_image">Login portal background image.</string>

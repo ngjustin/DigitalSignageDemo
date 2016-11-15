@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             }
         });
 
-        bottomBar.setActiveTabColor("#C2185B");
+        bottomBar.setActiveTabColor("#039789");
 
         Bundle b = new Bundle();
         b.putParcelableArrayList("adsList", ads);

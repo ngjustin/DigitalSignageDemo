@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,12 @@ public class FirstFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.first_frag, container, false);
-        TextView tv = (TextView) v.findViewById(R.id.tvFragFirst);
-        tv.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
+        View v = inflater.inflate(R.layout.material_design_profile_screen_xml_ui_design, container, false);
+        //View v = inflater.inflate(R.layout.first_frag, container, false);
+        //TextView tv = (TextView) v.findViewById(R.id.tvFragFirst);
+        //tv.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
 
+        //((AppCompatActivity)getActivity()).getSupportActionBar().hide();
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getActivity().setTitle("Profile");
 

@@ -4,8 +4,20 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="wrap_content"
                 android:background="#ffffff"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:padding="4dp">
 
+    <TextView
+        android:text="@string/hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/helloTextView"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="46sp"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/Blogin"
@@ -13,11 +25,10 @@
         android:layout_height="wrap_content"
         android:onClick="onButtonClick"
         android:text="@string/log_out"
-        android:layout_marginBottom="72dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="50dp"
-        android:layout_below="@+id/tvFragFirst"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginBottom="36dp"
+        android:theme="@style/AppTheme.Button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/tvFragFirst"
@@ -25,21 +36,20 @@
         android:layout_height="wrap_content"
         android:textSize="28sp"
         android:text="@string/emptyString"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textAlignment="center"/>
+        android:textAlignment="textStart"
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/helloTextView"
+        android:layout_toRightOf="@+id/helloTextView"
+        android:layout_toEndOf="@+id/helloTextView" />
 
     <TextView
-        android:text="@string/hello"
+        android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/helloTextView"
-        android:layout_marginBottom="35dp"
-        android:layout_above="@+id/tvFragFirst"
-        android:layout_centerHorizontal="true"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="32sp"/>
-
+        android:layout_alignTop="@+id/tvFragFirst"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView2"
+        android:textSize="30sp" />
 
 </RelativeLayout>
