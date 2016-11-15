@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public class LoginActivity extends Activity {
 
+    User justin = new User("Justin", "Ng", "Computer Science", 20, "Male");
     User johnny = new User("Johnny", "Appleseed", "Computer Science", 20, "Male");
     User jane = new User("Jane", "Doe", "Software Engineering", 18, "Female");
     User lenny = new User("Lenny", "Linux", "Psychology", 43, "Male");
@@ -28,10 +29,12 @@ public class LoginActivity extends Activity {
     }
 
     public void loginClicked(View view){
-        //System.out.println("Button pressed");
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         switch(view.getId())
         {
+            case R.id.buttonJustin:
+                intent.putExtra("User", justin);
+                break;
             case R.id.buttonJohnny:
                 intent.putExtra("User", johnny);
                 break;
@@ -48,6 +51,5 @@ public class LoginActivity extends Activity {
                 throw new RuntimeException("Unknown button ID");
         }
         startActivity(intent);
-        finish();
     }
 }

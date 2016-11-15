@@ -114,8 +114,22 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     }
 
     public void onButtonClick(View v) {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle("Log out?");
+        builder.setMessage("Are you sure you want to log out?");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     public void onClick(View view){
@@ -141,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
             builder.setTitle("Scan Success");
             builder.setMessage("The ad feed has been updated with ads.");
-            builder.setPositiveButton("OK.", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     mScannerView.stopCamera();
                     setContentView(R.layout.activity_main);
@@ -183,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         } else {
             builder.setTitle("Scan Failure");
             builder.setMessage("Invalid QR code scanned.");
-            builder.setPositiveButton("OK.", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     mScannerView.stopCamera();
                     setContentView(R.layout.activity_main);
@@ -289,5 +303,25 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
         MetricsWorker metricsWorker = new MetricsWorker(this);
         metricsWorker.execute(type, str_major, str_age, str_gender, str_display, str_time);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle("Log out?");
+        builder.setMessage("Are you sure you want to log out?");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

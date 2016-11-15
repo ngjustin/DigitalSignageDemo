@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by Justin on 10/11/2016.
  */
@@ -19,10 +21,15 @@ public class FirstFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.material_design_profile_screen_xml_ui_design, container, false);
-        //View v = inflater.inflate(R.layout.first_frag, container, false);
-        //TextView tv = (TextView) v.findViewById(R.id.tvFragFirst);
-        //tv.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
+        View v = inflater.inflate(R.layout.first_frag, container, false);
+        TextView name = (TextView) v.findViewById(R.id.user_profile_name);
+        name.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
+        TextView major = (TextView) v.findViewById(R.id.major);
+        major.setText(currentUser.getMajor());
+        TextView age = (TextView) v.findViewById(R.id.age);
+        age.setText(currentUser.getAge() + " years old");
+        TextView gender = (TextView) v.findViewById(R.id.gender);
+        gender.setText(currentUser.getGender());
 
         //((AppCompatActivity)getActivity()).getSupportActionBar().hide();
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
