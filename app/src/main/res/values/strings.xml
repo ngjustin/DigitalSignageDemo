@@ -19,4 +19,6 @@
     <string name="age">Age</string>
     <string name="major">Major</string>
     <string name="gender">Gender</string>
+    <string name="button_to_log_out_of_user_profile">Button to log out of user profile</string>
+    <string name="banner_image_for_user_profile">Banner image for user profile</string>
 </resources>

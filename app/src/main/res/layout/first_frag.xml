@@ -12,7 +12,8 @@
             android:layout_width="match_parent"
             android:layout_height="225dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/navigation_header_image" />
+            android:src="@drawable/navigation_header_image"
+            android:contentDescription="@string/banner_image_for_user_profile" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -60,7 +61,8 @@
                 android:layout_marginEnd="12dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/button_to_log_out_of_user_profile" />
 
         </RelativeLayout>
 
