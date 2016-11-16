@@ -61,14 +61,6 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         for (int i = 0; i < 6; i++) {
             ads.add(new Ad("No ads yet :(", "Nothing here.", "Nothing here.", "Nothing here.", "http://i.imgur.com/k05H7bH.png", "http://i.imgur.com/k05H7bH.png"));
         }
-        /*new DownloadWebpageTask(new AsyncResult() {
-            @Override
-            public void onResult(JSONObject object) {
-                ads.clear();
-                processJson(object);
-                pushMetrics();
-            }
-        }, MainActivity.this).execute("https://spreadsheets.google.com/tq?key=1a7_HmbfYc2sWd95JiSH6ikwG6ikffGUQ5Df81VcoekM");*/
 
         currentUser = (User)getIntent().getSerializableExtra("User");
         addFragments(instanceState);
@@ -89,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         bottomBar = BottomBar.attach(this, savedInstanceState);
         three = ThirdFragment.newInstance();
         bottomBar.setFragmentItems(getSupportFragmentManager(), R.id.fragmentContainer,
-                new BottomBarFragment(FirstFragment.newInstance(currentUser), R.drawable.ic_login_white_24dp, "User"),
-                new BottomBarFragment(SecondFragment.newInstance(), R.drawable.ic_qrreader_on_white_24dp, "QR Reader"),
+                new BottomBarFragment(FirstFragment.newInstance(currentUser), R.drawable.ic_login_white_24dp, "Profile"),
+                new BottomBarFragment(SecondFragment.newInstance(), R.drawable.ic_qrreader_on_white_24dp, "QR Scanner"),
                 new BottomBarFragment(three, R.drawable.ic_ads_white_24dp, "Ads"));
         bottomBar.mapColorForTab(0, "#3B494C");
         bottomBar.mapColorForTab(1, "#00796B");

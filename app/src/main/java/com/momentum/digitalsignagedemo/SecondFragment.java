@@ -20,8 +20,8 @@ public class SecondFragment extends Fragment {
         View v = inflater.inflate(R.layout.second_frag, container, false);
 
         //((AppCompatActivity)getActivity()).getSupportActionBar().show();
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        getActivity().setTitle("QR Reader");
+        //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        getActivity().setTitle("QR Scanner");
 
         return v;
     }

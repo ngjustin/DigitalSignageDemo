@@ -35,7 +35,7 @@ public class ThirdFragment extends Fragment {
         View v = inflater.inflate(R.layout.third_frag, container, false);
 
         //((AppCompatActivity)getActivity()).getSupportActionBar().show();
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         getActivity().setTitle("Ads");
 
         rv = (RecyclerView)v.findViewById(R.id.rv);
