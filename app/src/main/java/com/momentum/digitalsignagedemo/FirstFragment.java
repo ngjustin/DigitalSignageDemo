@@ -31,8 +31,6 @@ public class FirstFragment extends Fragment {
         TextView gender = (TextView) v.findViewById(R.id.gender);
         gender.setText(currentUser.getGender());
 
-        //((AppCompatActivity)getActivity()).getSupportActionBar().hide();
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getActivity().setTitle("Profile");
 
         return v;

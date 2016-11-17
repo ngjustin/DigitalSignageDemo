@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:layout_alignParentTop="true"
-        android:background="#3f51b5"
+        android:background="@color/colorPrimary"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
         android:text="@string/emptyString"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#fff" />
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:textColor="@color/white" />
 
     <ImageView
         android:layout_width="match_parent"

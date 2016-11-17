@@ -18,9 +18,6 @@ public class SecondFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.second_frag, container, false);
-
-        //((AppCompatActivity)getActivity()).getSupportActionBar().show();
-        //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getActivity().setTitle("QR Scanner");
 
         return v;

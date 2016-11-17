@@ -3,6 +3,7 @@ package com.momentum.digitalsignagedemo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by Mohammad on 10/27/2016.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity {
 
     User justin = new User("Justin", "Ng", "Computer Science", 20, "Male");
     User johnny = new User("Johnny", "Appleseed", "Computer Science", 20, "Male");
