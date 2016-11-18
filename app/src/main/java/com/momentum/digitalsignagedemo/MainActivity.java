@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                             public void onResult(JSONObject object) {
                                 ads.clear();
                                 processJson(object);
-                                str_display = "Student Union Monitor 1";
+                                str_display = "Student Union Display 1";
                                 pushMetrics();
                             }
                         }, MainActivity.this).execute("https://spreadsheets.google.com/tq?key=1a7_HmbfYc2sWd95JiSH6ikwG6ikffGUQ5Df81VcoekM");
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                             public void onResult(JSONObject object) {
                                 ads.clear();
                                 processJson(object);
-                                str_display = "Student Union Monitor 2";
+                                str_display = "Student Union Display 2";
                                 pushMetrics();
                             }
                         }, MainActivity.this).execute("https://spreadsheets.google.com/tq?key=1SpZGMkAQZtPFFDmbN7FZanAXj930qm9Z-B22s7KW0I4");
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                             public void onResult(JSONObject object) {
                                 ads.clear();
                                 processJson(object);
-                                str_display = "Student Union Monitor 3";
+                                str_display = "Student Union Display  3";
                                 pushMetrics();
                             }
                         }, MainActivity.this).execute("https://spreadsheets.google.com/tq?key=1du94yZUR8MLnKfqlYGmlOruQAPaNgAvyNgajdO51YUU");

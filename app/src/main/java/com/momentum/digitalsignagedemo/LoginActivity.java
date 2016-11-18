@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
-        setTitle("Log in");
+        setTitle("Login");
         setContentView(R.layout.login_activity);
     }
 
