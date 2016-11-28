@@ -1,8 +1,6 @@
 package com.momentum.digitalsignagedemo;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.icu.util.Output;
 import android.os.AsyncTask;
 import android.widget.Toast;
 

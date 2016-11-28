@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.momentum.digitalsignagedemo"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -24,12 +25,13 @@
             android:name=".DetailedAdDisplayActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".QRReader"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation" />
     </application>
 
 </manifest>

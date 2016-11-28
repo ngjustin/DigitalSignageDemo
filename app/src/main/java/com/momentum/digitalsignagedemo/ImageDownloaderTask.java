@@ -18,10 +18,10 @@ import android.widget.ImageView;
 
 class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
 
-    private final WeakReference<ImageView> imageViewReference;
+    private final WeakReference<ImageView> ref;
 
     public ImageDownloaderTask(ImageView imageView) {
-        imageViewReference = new WeakReference<ImageView>(imageView);
+        ref = new WeakReference<ImageView>(imageView);
     }
 
     @Override
@@ -30,19 +30,19 @@ class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     @Override
-    protected void onPostExecute(Bitmap bitmap) {
+    protected void onPostExecute(Bitmap bm) {
         if (isCancelled()) {
-            bitmap = null;
+            bm = null;
         }
 
-        if (imageViewReference != null) {
-            ImageView imageView = imageViewReference.get();
-            if (imageView != null) {
-                if (bitmap != null) {
-                    imageView.setImageBitmap(bitmap);
+        if (ref != null) {
+            ImageView image = ref.get();
+            if (image != null) {
+                if (bm != null) {
+                    image.setImageBitmap(bm);
                 } else {
-                    Drawable placeholder = imageView.getContext().getResources().getDrawable(R.drawable.placeholder);
-                    imageView.setImageDrawable(placeholder);
+                    Drawable temp = image.getContext().getResources().getDrawable(R.drawable.placeholder);
+                    image.setImageDrawable(temp);
                 }
             }
 
@@ -50,27 +50,27 @@ class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     private Bitmap downloadBitmap(String url) {
-        HttpURLConnection urlConnection = null;
+        HttpURLConnection conn = null;
         try {
             URL uri = new URL(url);
-            urlConnection = (HttpURLConnection) uri.openConnection();
+            conn = (HttpURLConnection) uri.openConnection();
 
-            int statusCode = urlConnection.getResponseCode();
+            int statusCode = conn.getResponseCode();
             if (statusCode != HttpStatus.SC_OK) {
                 return null;
             }
 
-            InputStream inputStream = urlConnection.getInputStream();
+            InputStream inputStream = conn.getInputStream();
             if (inputStream != null) {
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 return bitmap;
             }
         } catch (Exception e) {
-            urlConnection.disconnect();
+            conn.disconnect();
             Log.w("ImageDownloader", "Error downloading image from " + url);
         } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
+            if (conn != null) {
+                conn.disconnect();
             }
         }
         return null;

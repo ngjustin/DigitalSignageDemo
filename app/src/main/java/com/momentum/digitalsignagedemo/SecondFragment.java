@@ -3,16 +3,12 @@ package com.momentum.digitalsignagedemo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -24,8 +20,6 @@ import org.json.JSONObject;
  */
 
 public class SecondFragment extends Fragment {
-
-    private String toast;
 
     public SecondFragment() {
     }
@@ -40,7 +34,7 @@ public class SecondFragment extends Fragment {
         View v = inflater.inflate(R.layout.second_frag, container, false);
         getActivity().setTitle("QR Scanner");
 
-        Button scan = (Button) v.findViewById(R.id.button);
+        FloatingActionButton scan = (FloatingActionButton) v.findViewById(R.id.button);
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +46,13 @@ public class SecondFragment extends Fragment {
     }
 
     public void scanFromFragment() {
-        IntentIntegrator.forSupportFragment(this).initiateScan();
+        IntentIntegrator integrator = IntentIntegrator.forSupportFragment(this);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+        integrator.setPrompt("");
+        integrator.setBeepEnabled(false);
+        integrator.setBarcodeImageEnabled(true);
+        integrator.setOrientationLocked(true);
+        integrator.initiateScan();
     }
 
     public static SecondFragment newInstance() {
@@ -65,7 +65,7 @@ public class SecondFragment extends Fragment {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if(result.getContents() == null) {
-                toast = "Cancelled from fragment";
+
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setCancelable(false);

@@ -2,9 +2,6 @@ package com.momentum.digitalsignagedemo;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,26 +12,17 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import com.google.zxing.Result;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarFragment;
 import com.roughike.bottombar.OnTabSelectedListener;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 
@@ -63,21 +51,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         currentUser = (User)getIntent().getSerializableExtra("User");
-        addFragments(instanceState);
 
-        mErrorString = new SparseIntArray();
-        requestAppPermissions(new String[] {
-                        Manifest.permission.CAMERA },
-                R.string.msg, REQUEST_PERMISSION);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        bottomBar.onSaveInstanceState(outState);
-    }
-
-    public void addFragments(Bundle savedInstanceState) {
         bottomBar = BottomBar.attach(this, savedInstanceState);
         three = ThirdFragment.newInstance();
         bottomBar.setFragmentItems(getSupportFragmentManager(), R.id.fragmentContainer,
@@ -103,6 +77,17 @@ public class MainActivity extends AppCompatActivity {
         Bundle b = new Bundle();
         b.putParcelableArrayList("adsList", ads);
         three.setArguments(b);
+
+        mErrorString = new SparseIntArray();
+        requestAppPermissions(new String[] {
+                        Manifest.permission.CAMERA },
+                R.string.msg, REQUEST_PERMISSION);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        bottomBar.onSaveInstanceState(outState);
     }
 
     public void onButtonClick(View v) {
@@ -132,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onPermissionsGranted(int requestCode) {
-        //Toast.makeText(getApplicationContext(), "Permission granted.", Toast.LENGTH_LONG).show();
+
     }
 
     public void requestAppPermissions(final String[] requestedPermissions, final int stringId, final int requestCode) {
@@ -230,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setTitle("Log out?");
+        builder.setTitle("Log out");
         builder.setMessage("Are you sure you want to log out?");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
