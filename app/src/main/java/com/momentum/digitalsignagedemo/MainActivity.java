@@ -38,7 +38,7 @@ import java.util.List;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 
-public class MainActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
+public class MainActivity extends AppCompatActivity {
     private BottomBar bottomBar;
     private ZXingScannerView mScannerView;
     private User currentUser;
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     public void onButtonClick(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setTitle("Log out?");
+        builder.setTitle("Log out");
         builder.setMessage("Are you sure you want to log out?");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -124,82 +124,11 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         alertDialog.show();
     }
 
-    public void onClick(View view){
-        mScannerView = new ZXingScannerView(this);
-        setContentView(mScannerView);
-        mScannerView.setResultHandler(this);
-        mScannerView.startCamera();
-    }
-
-    /*protected void onPause() {
-        super.onPause();
-        mScannerView.stopCamera();
-    }*/
-
-    @Override
-    public void handleResult(Result result){
-        Log.v("handleResult", result.getText());
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(false);
-        final String resText = result.getText();
-        if("123456789".contains(resText)) {
-            urlIndex = Integer.parseInt(resText);
-
-            builder.setTitle("Scan Success");
-            builder.setMessage("The ad feed has been updated with ads.");
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    mScannerView.stopCamera();
-                    setContentView(R.layout.activity_main);
-                    if (resText.equals("1")) {
-                        new DownloadWebpageTask(new AsyncResult() {
-                            @Override
-                            public void onResult(JSONObject object) {
-                                ads.clear();
-                                processJson(object);
-                                str_display = "Student Union Display 1";
-                                pushMetrics();
-                            }
-                        }, MainActivity.this).execute("https://spreadsheets.google.com/tq?key=1a7_HmbfYc2sWd95JiSH6ikwG6ikffGUQ5Df81VcoekM");
-                    } else if (resText.equals("2")) {
-                        new DownloadWebpageTask(new AsyncResult() {
-                            @Override
-                            public void onResult(JSONObject object) {
-                                ads.clear();
-                                processJson(object);
-                                str_display = "Student Union Display 2";
-                                pushMetrics();
-                            }
-                        }, MainActivity.this).execute("https://spreadsheets.google.com/tq?key=1SpZGMkAQZtPFFDmbN7FZanAXj930qm9Z-B22s7KW0I4");
-                    } else if (resText.equals("3")) {
-                        new DownloadWebpageTask(new AsyncResult() {
-                            @Override
-                            public void onResult(JSONObject object) {
-                                ads.clear();
-                                processJson(object);
-                                str_display = "Student Union Display  3";
-                                pushMetrics();
-                            }
-                        }, MainActivity.this).execute("https://spreadsheets.google.com/tq?key=1du94yZUR8MLnKfqlYGmlOruQAPaNgAvyNgajdO51YUU");
-                    }
-                    addFragments(instanceState);
-                    bottomBar.selectTabAtPosition(1, true);
-                }
-            });
-        } else {
-            builder.setTitle("Scan Failure");
-            builder.setMessage("Invalid QR code scanned.");
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    mScannerView.stopCamera();
-                    setContentView(R.layout.activity_main);
-                    addFragments(instanceState);
-                    bottomBar.selectTabAtPosition(1, true);
-                }
-            });
-        }
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+    public void handleResult(String s, JSONObject object){
+        ads.clear();
+        processJson(object);
+        str_display = s;
+        pushMetrics();
     }
 
     public void onPermissionsGranted(int requestCode) {

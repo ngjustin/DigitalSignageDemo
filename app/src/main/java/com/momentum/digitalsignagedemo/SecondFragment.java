@@ -1,5 +1,7 @@
 package com.momentum.digitalsignagedemo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONObject;
+
 /**
  * Created by Justin on 10/11/2016.
  */
@@ -29,7 +33,6 @@ public class SecondFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        displayToast();
     }
 
     @Override
@@ -57,13 +60,6 @@ public class SecondFragment extends Fragment {
         return f;
     }
 
-    private void displayToast() {
-        if(getActivity() != null && toast != null) {
-            Toast.makeText(getActivity(), toast, Toast.LENGTH_LONG).show();
-            toast = null;
-        }
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -71,12 +67,51 @@ public class SecondFragment extends Fragment {
             if(result.getContents() == null) {
                 toast = "Cancelled from fragment";
             } else {
-                toast = "Scanned from fragment: " + result.getContents();
-                System.out.println(result.getContents());
-            }
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setCancelable(false);
+                final String resText = result.getContents();
+                final MainActivity act = (MainActivity) getActivity();
+                if("123456789".contains(resText)) {
+                    builder.setTitle("Scan Success");
+                    builder.setMessage("The ad feed has been updated with ads.");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            if (resText.equals("1")) {
+                                new DownloadWebpageTask(new AsyncResult() {
+                                    @Override
+                                    public void onResult(JSONObject object) {
+                                        act.handleResult("Student Union Display 1", object);
+                                    }
+                                }, getContext()).execute("https://spreadsheets.google.com/tq?key=1a7_HmbfYc2sWd95JiSH6ikwG6ikffGUQ5Df81VcoekM");
+                            } else if (resText.equals("2")) {
+                                new DownloadWebpageTask(new AsyncResult() {
+                                    @Override
+                                    public void onResult(JSONObject object) {
+                                        act.handleResult("Student Union Display 2", object);
+                                    }
+                                }, getContext()).execute("https://spreadsheets.google.com/tq?key=1SpZGMkAQZtPFFDmbN7FZanAXj930qm9Z-B22s7KW0I4");
+                            } else if (resText.equals("3")) {
+                                new DownloadWebpageTask(new AsyncResult() {
+                                    @Override
+                                    public void onResult(JSONObject object) {
+                                        act.handleResult("Student Union Display 3", object);
+                                    }
+                                }, getContext()).execute("https://spreadsheets.google.com/tq?key=1du94yZUR8MLnKfqlYGmlOruQAPaNgAvyNgajdO51YUU");
+                            }
+                        }
+                    });
+                } else {
+                    builder.setTitle("Scan Failure");
+                    builder.setMessage("Invalid QR code scanned.");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
 
-            // At this point we may or may not have a reference to the activity
-            displayToast();
+                        }
+                    });
+                }
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
         }
     }
 }
