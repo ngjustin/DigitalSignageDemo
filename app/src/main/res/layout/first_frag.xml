@@ -31,7 +31,7 @@
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#455A64"
+            android:background="#37474F"
             android:elevation="4dp"
             android:paddingBottom="10dp"
             android:layout_below="@+id/header_cover_image"

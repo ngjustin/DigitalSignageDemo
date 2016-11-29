@@ -103,21 +103,21 @@ public class SecondFragment extends Fragment {
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             if (resText.equals("1")) {
-                                new DownloadWebpageTask(new AsyncResult() {
+                                new AdsDownloadTask(new AsyncResult() {
                                     @Override
                                     public void onResult(JSONObject object) {
                                         act.handleResult("Student Union Display 1", object);
                                     }
                                 }, getContext()).execute("https://spreadsheets.google.com/tq?key=1a7_HmbfYc2sWd95JiSH6ikwG6ikffGUQ5Df81VcoekM");
                             } else if (resText.equals("2")) {
-                                new DownloadWebpageTask(new AsyncResult() {
+                                new AdsDownloadTask(new AsyncResult() {
                                     @Override
                                     public void onResult(JSONObject object) {
                                         act.handleResult("Student Union Display 2", object);
                                     }
                                 }, getContext()).execute("https://spreadsheets.google.com/tq?key=1SpZGMkAQZtPFFDmbN7FZanAXj930qm9Z-B22s7KW0I4");
                             } else if (resText.equals("3")) {
-                                new DownloadWebpageTask(new AsyncResult() {
+                                new AdsDownloadTask(new AsyncResult() {
                                     @Override
                                     public void onResult(JSONObject object) {
                                         act.handleResult("Student Union Display 3", object);
