@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private User currentUser;
     private static final int CAMERA_PERMISSION_CODE = 10;
     private ArrayList<Ad> ads;
+    Bundle b;
     SecondFragment two;
     ThirdFragment three;
     String str_display = "";
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         bottomBar.setActiveTabColor("#039789");
 
-        Bundle b = new Bundle();
+        b = new Bundle();
         b.putParcelableArrayList("adsList", ads);
         three.setArguments(b);
     }
@@ -121,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
     public void handleResult(String s, JSONObject object){
         ads.clear();
         processJson(object);
+        three.updateAdapter();
+        bottomBar.selectTabAtPosition(2, true);
         str_display = s;
         pushMetrics();
     }

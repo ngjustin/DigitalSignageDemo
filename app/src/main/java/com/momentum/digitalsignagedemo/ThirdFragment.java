@@ -40,8 +40,15 @@ public class ThirdFragment extends Fragment {
         return f;
     }
 
-    private void initializeAdapter(){
+    public void initializeAdapter(){
         adapter = new RVAdapter(ads);
         rv.setAdapter(adapter);
+    }
+
+    public void updateAdapter() {
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+            rv.setAdapter(adapter);
+        }
     }
 }

@@ -82,7 +82,6 @@ public class SecondFragment extends Fragment {
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
         integrator.setPrompt("");
         integrator.setBeepEnabled(false);
-        integrator.setBarcodeImageEnabled(true);
         integrator.setOrientationLocked(true);
         integrator.initiateScan();
     }
