@@ -17,7 +17,6 @@ import android.widget.ImageView;
  */
 
 class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
-
     private final WeakReference<ImageView> ref;
 
     public ImageDownloaderTask(ImageView imageView) {

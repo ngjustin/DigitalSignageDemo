@@ -8,17 +8,17 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-
 /**
  * Created by Mohammad on 10/27/2016.
  */
-public class LoginActivity extends AppCompatActivity {
 
+public class LoginActivity extends AppCompatActivity {
     User justin = new User("Justin", "Ng", "Computer Science", 20, "Male");
     User johnny = new User("Johnny", "Appleseed", "Computer Science", 20, "Male");
     User jane = new User("Jane", "Doe", "Software Engineering", 18, "Female");
     User lenny = new User("Lenny", "Linux", "Psychology", 43, "Male");
     User wendy = new User("Wendy", "Darling", "Nursing", 21, "Female");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

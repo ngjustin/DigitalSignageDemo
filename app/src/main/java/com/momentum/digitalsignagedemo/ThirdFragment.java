@@ -14,7 +14,6 @@ import java.util.ArrayList;
  */
 
 public class ThirdFragment extends Fragment {
-
     private ArrayList<Ad> ads;
     private RecyclerView rv;
     private RVAdapter adapter;

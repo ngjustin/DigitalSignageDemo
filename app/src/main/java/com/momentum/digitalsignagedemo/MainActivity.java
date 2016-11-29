@@ -1,18 +1,11 @@
 package com.momentum.digitalsignagedemo;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.SparseIntArray;
 import android.view.View;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.BottomBarFragment;
@@ -23,24 +16,22 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
+/**
+ * Created by Justin on 10/10/2016.
+ */
 
 public class MainActivity extends AppCompatActivity {
     private BottomBar bottomBar;
-    private ZXingScannerView mScannerView;
     private User currentUser;
-    private Bundle instanceState;
-    private SparseIntArray mErrorString;
-    private static final int REQUEST_PERMISSION = 10;
-    private int urlIndex;
+    private static final int CAMERA_PERMISSION_CODE = 10;
     private ArrayList<Ad> ads;
+    SecondFragment two;
     ThirdFragment three;
     String str_display = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        instanceState = savedInstanceState;
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -53,10 +44,11 @@ public class MainActivity extends AppCompatActivity {
         currentUser = (User)getIntent().getSerializableExtra("User");
 
         bottomBar = BottomBar.attach(this, savedInstanceState);
+        two = SecondFragment.newInstance();
         three = ThirdFragment.newInstance();
         bottomBar.setFragmentItems(getSupportFragmentManager(), R.id.fragmentContainer,
                 new BottomBarFragment(FirstFragment.newInstance(currentUser), R.drawable.ic_login_white_24dp, "Profile"),
-                new BottomBarFragment(SecondFragment.newInstance(), R.drawable.ic_qrreader_on_white_24dp, "QR Scanner"),
+                new BottomBarFragment(two, R.drawable.ic_qrreader_on_white_24dp, "QR Scanner"),
                 new BottomBarFragment(three, R.drawable.ic_ads_white_24dp, "Ads"));
         bottomBar.mapColorForTab(0, "#3B494C");
         bottomBar.mapColorForTab(1, "#00796B");
@@ -77,17 +69,34 @@ public class MainActivity extends AppCompatActivity {
         Bundle b = new Bundle();
         b.putParcelableArrayList("adsList", ads);
         three.setArguments(b);
-
-        mErrorString = new SparseIntArray();
-        requestAppPermissions(new String[] {
-                        Manifest.permission.CAMERA },
-                R.string.msg, REQUEST_PERMISSION);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         bottomBar.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode != CAMERA_PERMISSION_CODE) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            return;
+        }
+        if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            two.scanFromFragment();
+            return;
+        }
+        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Permission Error")
+                .setMessage(R.string.msg)
+                .setPositiveButton(android.R.string.ok, listener)
+                .show();
     }
 
     public void onButtonClick(View v) {
@@ -114,68 +123,6 @@ public class MainActivity extends AppCompatActivity {
         processJson(object);
         str_display = s;
         pushMetrics();
-    }
-
-    public void onPermissionsGranted(int requestCode) {
-
-    }
-
-    public void requestAppPermissions(final String[] requestedPermissions, final int stringId, final int requestCode) {
-        mErrorString.put(requestCode, stringId);
-
-        int permissionCheck = PackageManager.PERMISSION_GRANTED;
-        boolean showRequestPermissions = false;
-        for (String permission : requestedPermissions) {
-            permissionCheck = permissionCheck + ContextCompat.checkSelfPermission(this, permission);
-            showRequestPermissions = showRequestPermissions || ActivityCompat.shouldShowRequestPermissionRationale(this, permission);
-        }
-
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            if (showRequestPermissions) {
-                Snackbar.make(findViewById(android.R.id.content), stringId,
-                        Snackbar.LENGTH_INDEFINITE).setAction("GRANT", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ActivityCompat.requestPermissions(MainActivity.this, requestedPermissions, requestCode);
-                    }
-                }).show();
-            }
-            else {
-                ActivityCompat.requestPermissions(this, requestedPermissions, requestCode);
-            }
-        }
-        else {
-            onPermissionsGranted(requestCode);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        int permissionCheck = PackageManager.PERMISSION_GRANTED;
-        for (int permission : grantResults) {
-            permissionCheck = permissionCheck + permission;
-        }
-
-        if ((grantResults.length > 0) && PackageManager.PERMISSION_GRANTED == permissionCheck) {
-            onPermissionsGranted(requestCode);
-        }
-        else {
-            Snackbar.make(findViewById(android.R.id.content), mErrorString.get(requestCode),
-                    Snackbar.LENGTH_INDEFINITE).setAction("ENABLE", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent();
-                    i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                    i.setData(Uri.parse("package:" + getPackageName()));
-                    i.addCategory(Intent.CATEGORY_DEFAULT);
-                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                    startActivity(i);
-                }
-            }).show();
-        }
     }
 
     private void processJson(JSONObject object) {

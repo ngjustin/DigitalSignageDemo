@@ -30,7 +30,6 @@ public class MetricsWorker extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        //String metrics_url = "http://52.53.159.6/metrics.php";
         String metrics_url = "http://52.53.159.6/metrics.php";
         if (type.equals("metrics")) {
             try {

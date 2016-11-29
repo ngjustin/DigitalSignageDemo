@@ -1,18 +1,20 @@
 package com.momentum.digitalsignagedemo;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
 import org.json.JSONObject;
 
 /**
@@ -20,6 +22,7 @@ import org.json.JSONObject;
  */
 
 public class SecondFragment extends Fragment {
+    private static final int CAMERA_PERMISSION_CODE = 10;
 
     public SecondFragment() {
     }
@@ -38,11 +41,40 @@ public class SecondFragment extends Fragment {
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scanFromFragment();
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    requestCameraPermissions();
+                } else {
+                    scanFromFragment();
+                }
             }
         });
 
         return v;
+    }
+
+    public static SecondFragment newInstance() {
+        SecondFragment f = new SecondFragment();
+        return f;
+    }
+
+    private void requestCameraPermissions() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.CAMERA)) {
+            Snackbar.make(getView(), R.string.perm,
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ActivityCompat.requestPermissions(getActivity(),
+                                    new String[]{Manifest.permission.CAMERA},
+                                    CAMERA_PERMISSION_CODE);
+                        }
+                    })
+                    .show();
+        }
+        else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA},
+                    CAMERA_PERMISSION_CODE);
+        }
     }
 
     public void scanFromFragment() {
@@ -53,11 +85,6 @@ public class SecondFragment extends Fragment {
         integrator.setBarcodeImageEnabled(true);
         integrator.setOrientationLocked(true);
         integrator.initiateScan();
-    }
-
-    public static SecondFragment newInstance() {
-        SecondFragment f = new SecondFragment();
-        return f;
     }
 
     @Override

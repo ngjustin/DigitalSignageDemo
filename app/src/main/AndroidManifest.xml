@@ -30,7 +30,7 @@
             android:configChanges="orientation|screenSize"/>
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
-            android:screenOrientation="fullSensor"
+            android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
     </application>
 
