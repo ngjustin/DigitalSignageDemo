@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 /**
@@ -54,7 +55,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.AdViewHolder> {
         adViewHolder.adTitle.setText(ads.get(i).getTitle());
         adViewHolder.adDetails.setText(ads.get(i).getDetails());
         if (adViewHolder.adPhoto != null) {
-            new ImageDownloaderTask(adViewHolder.adPhoto).execute(ads.get(i).getThumbnail());
+            Picasso.with(adViewHolder.adPhoto.getContext()).load(ads.get(i).getThumbnail()).into(adViewHolder.adPhoto);
         }
         adViewHolder.cv.setOnClickListener(new View.OnClickListener() {
             @Override

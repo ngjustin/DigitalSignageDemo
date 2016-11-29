@@ -7,6 +7,7 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 /**
@@ -42,7 +43,7 @@ public class DetailedAdDisplayActivity extends Activity {
         if (!ads.isEmpty()) {
             for (Ad d : ads) {
                 if (d.getTitle().toLowerCase().equals(intentTitle.toLowerCase())) {
-                    new ImageDownloaderTask(image).execute(d.getPicture());
+                    Picasso.with(image.getContext()).load(d.getPicture()).into(image);
                     title.setText(d.getTitle());
                     details.setText(d.getDetails());
                     description.setText(d.getDescription());
