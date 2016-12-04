@@ -1,4 +1,4 @@
-package com.momentum.digitalsignagedemo;
+package com.momentum.digitalsignageanalytics;
 
 import java.io.Serializable;
 

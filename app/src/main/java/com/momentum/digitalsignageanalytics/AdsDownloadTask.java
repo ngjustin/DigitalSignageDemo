@@ -1,4 +1,4 @@
-package com.momentum.digitalsignagedemo;
+package com.momentum.digitalsignageanalytics;
 
 import android.app.ProgressDialog;
 import android.content.Context;
